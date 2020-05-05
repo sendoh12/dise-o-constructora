@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="constructora_diseñoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cd_roles">
+          <Key>
+            <PropertyRef Name="ROLES_ID" />
+          </Key>
+          <Property Name="ROLES_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ROLES_NOMBRES" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="cd_usuarios">
+          <Key>
+            <PropertyRef Name="USUARIOS_ID" />
+          </Key>
+          <Property Name="USUARIOS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USUARIOS_NOMBRE" Type="varchar" MaxLength="100" />
+          <Property Name="USUARIOS_USUARIO" Type="varchar" MaxLength="100" />
+          <Property Name="USUARIOS_CONTRASEÑA" Type="varchar" MaxLength="100" />
+          <Property Name="USUARIOS_ROL" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_cd_usuarios_cd_roles">
+          <End Role="cd_roles" Type="Self.cd_roles" Multiplicity="1" />
+          <End Role="cd_usuarios" Type="Self.cd_usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cd_roles">
+              <PropertyRef Name="ROLES_ID" />
+            </Principal>
+            <Dependent Role="cd_usuarios">
+              <PropertyRef Name="USUARIOS_ROL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="constructora_diseñoModelStoreContainer">
+          <EntitySet Name="cd_roles" EntityType="Self.cd_roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cd_usuarios" EntityType="Self.cd_usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_cd_usuarios_cd_roles" Association="Self.FK_cd_usuarios_cd_roles">
+            <End Role="cd_roles" EntitySet="cd_roles" />
+            <End Role="cd_usuarios" EntitySet="cd_usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="constructora_diseñoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cd_roles">
+          <Key>
+            <PropertyRef Name="ROLES_ID" />
+          </Key>
+          <Property Name="ROLES_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ROLES_NOMBRES" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cd_usuarios" Relationship="Self.FK_cd_usuarios_cd_roles" FromRole="cd_roles" ToRole="cd_usuarios" />
+        </EntityType>
+        <EntityType Name="cd_usuarios">
+          <Key>
+            <PropertyRef Name="USUARIOS_ID" />
+          </Key>
+          <Property Name="USUARIOS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USUARIOS_NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIOS_USUARIO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIOS_CONTRASEÑA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIOS_ROL" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cd_roles" Relationship="Self.FK_cd_usuarios_cd_roles" FromRole="cd_usuarios" ToRole="cd_roles" />
+        </EntityType>
+        <Association Name="FK_cd_usuarios_cd_roles">
+          <End Role="cd_roles" Type="Self.cd_roles" Multiplicity="1" />
+          <End Role="cd_usuarios" Type="Self.cd_usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cd_roles">
+              <PropertyRef Name="ROLES_ID" />
+            </Principal>
+            <Dependent Role="cd_usuarios">
+              <PropertyRef Name="USUARIOS_ROL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="constructora_diseñoEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cd_roles" EntityType="Self.cd_roles" />
+          <EntitySet Name="cd_usuarios" EntityType="Self.cd_usuarios" />
+          <AssociationSet Name="FK_cd_usuarios_cd_roles" Association="Self.FK_cd_usuarios_cd_roles">
+            <End Role="cd_roles" EntitySet="cd_roles" />
+            <End Role="cd_usuarios" EntitySet="cd_usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="constructora_diseñoModelStoreContainer" CdmEntityContainer="constructora_diseñoEntities1">
+          <EntitySetMapping Name="cd_roles">
+            <EntityTypeMapping TypeName="constructora_diseñoModel.cd_roles">
+              <MappingFragment StoreEntitySet="cd_roles">
+                <ScalarProperty Name="ROLES_ID" ColumnName="ROLES_ID" />
+                <ScalarProperty Name="ROLES_NOMBRES" ColumnName="ROLES_NOMBRES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cd_usuarios">
+            <EntityTypeMapping TypeName="constructora_diseñoModel.cd_usuarios">
+              <MappingFragment StoreEntitySet="cd_usuarios">
+                <ScalarProperty Name="USUARIOS_ID" ColumnName="USUARIOS_ID" />
+                <ScalarProperty Name="USUARIOS_NOMBRE" ColumnName="USUARIOS_NOMBRE" />
+                <ScalarProperty Name="USUARIOS_USUARIO" ColumnName="USUARIOS_USUARIO" />
+                <ScalarProperty Name="USUARIOS_CONTRASEÑA" ColumnName="USUARIOS_CONTRASEÑA" />
+                <ScalarProperty Name="USUARIOS_ROL" ColumnName="USUARIOS_ROL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,75 @@
+﻿@model Modelos.cd_usuarios
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section id="dom">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Lista de Administradores</h4>
+
+                </div>
+                <div class="card-content ">
+                    <div class="card-body card-dashboard table-responsive">
+                        <table class="table table-striped table-bordered dom-jQuery-events">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Usuario</th>
+                                    <th>Tipo de usuario</th>
+                                    <th>Acciones</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var usuarios in ViewBag.data)
+                                {
+                                    <tr>
+                                        <td>@usuarios.USUARIOS_NOMBRE</td>
+                                        <td>@usuarios.USUARIOS_USUARIO</td>
+                                        <td>@usuarios.USUARIOS_ROL</td>
+                                        <td>
+                                            @Html.ActionLink("Editar", "EditarAdministrador", "Menu", new { id = @usuarios.USUARIOS_ID }, new { @class = "btn btn-warning" })
+                                            @*@Html.ActionLink("Borrar", "EliminarAdministrador", "Menu", new { id = @usuarios.USUARIOS_ID }, new { @class = "btn btn-danger" })*@
+                                            <button class="btn btn-danger" onclick="BorrarAjax(id = @usuarios.USUARIOS_ID)">Borrar</button>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    function BorrarAjax(id_user) {
+        //console.log(id);
+
+        $.ajax({
+            url: "/Menu/EliminarAdministrador",
+            data: { id_user: id_user },
+                method: "POST",
+                success: function (resultado) {
+                    if (resultado.result) {
+                        alert(resultado.mensaje);
+                        window.location.href = '@Url.Action("MostrarAdministradores", "Menu")'
+                    }
+                    else {
+                        alert(resultado.mensaje);
+                    }
+                }
+            });
+    }
+</script>
