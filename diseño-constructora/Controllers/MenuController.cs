@@ -167,9 +167,17 @@ namespace diseño_constructora.Controllers
         }
 
         [HttpPost]
-        public ActionResult AjaxProyectos()
+        public ActionResult AjaxProyectos(string PROYECTOS_NOMBRE, string PROYECTOS_DESCRIPCION, HttpPostedFileBase archivo)
         {
-            return View();
+            Thread.Sleep(2000);
+            bool result = false;
+            string mensaje = "Error al insertar la imagen";
+            if (archivo != null)
+            {
+                mensaje = "imagen encontrada con exito";
+                result = true;
+            }
+            return Json(new { result = result, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
 
 
