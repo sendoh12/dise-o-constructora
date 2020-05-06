@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="constructora_diseñoModel.cd_roles" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="constructora_diseñoModel.cd_usuarios" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="constructora_diseñoModel.FK_cd_usuarios_cd_roles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="constructora_diseñoModel.cd_proyectos" Width="1.5" PointX="5.25" PointY="2.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

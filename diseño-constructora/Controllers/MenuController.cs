@@ -35,6 +35,7 @@ namespace diseño_constructora.Controllers
                 ViewBag.data = obj.Filter(x => true);
             }
             return View();
+
         }
 
 
@@ -158,8 +159,20 @@ namespace diseño_constructora.Controllers
             }
             return Json(new { result = result, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
-        
-        
+
+        [HttpGet]
+        public ActionResult Cargarimagenes()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AjaxProyectos()
+        {
+            return View();
+        }
+
+
 
         private void Obj_Exception(object sender, ExceptionEventArgs e)
         {
@@ -172,12 +185,8 @@ namespace diseño_constructora.Controllers
 
         }
 
-        [HttpGet]
-        public ActionResult Cargarimagenes()
-        {
-            return View();
-        }
-
         
+
+
     }
 }

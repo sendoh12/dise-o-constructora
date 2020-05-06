@@ -27,5 +27,6 @@ namespace Modelos
     
         public virtual DbSet<cd_roles> cd_roles { get; set; }
         public virtual DbSet<cd_usuarios> cd_usuarios { get; set; }
+        public virtual DbSet<cd_proyectos> cd_proyectos { get; set; }
     }
 }

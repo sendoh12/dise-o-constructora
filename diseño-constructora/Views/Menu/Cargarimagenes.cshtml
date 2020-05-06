@@ -1,4 +1,4 @@
-﻿@model Modelos.Imagenes
+﻿@model Modelos.cd_proyectos
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -28,21 +28,40 @@
                             <div class="panel panel-primary">
                                 <div class="panel-body">
 
-                                    <form action="/Menu/ingresar" method="post" enctype="multipart/form-data">
+                                    @*<form action="/Menu/ingresar" method="post" enctype="multipart/form-data">*@
+                                    @using (Html.BeginForm("ingresar", "Menu", FormMethod.Post, new { @class = "form", id = "formulario" }))
+                                    {
+                                        @Html.AntiForgeryToken()
 
-                                        <h4 class="text-center">Cargar Multiple Imagenes</h4>
+                                        <h4 class="text-center">Cargar Multiples Imagenes</h4>
+                                        <div class="row justify-content-md-center">
+                                            <div class="col-md-6">
+                                                <div class="form-body">
+                                                    <div class="row">
+                                                        <div class="form-group col-12 mb-2">
 
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">Imagenes</label>
-                                            <div class="col-sm-8">
-                                                <input type="file" class="form-control" id="archivo[]" name="archivo[]" multiple="">
+                                                            <label class="" for="eventRegInput1">Nombre</label>
+                                                            @*@Html.EditorFor(model => model.PROYECTOS_NOMBRE, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre de la imagen" } })
+                                                              @Html.ValidationMessageFor(model => model.PROYECTOS_NOMBRE, "", new { @class = "text-danger" })*@
+                                                            <input type="text" id="NombreProyecto" name="NombreProyecto" class="form-control" placeholder="name" name="nombre">
+
+                                                            <label class="" for="eventRegInput1">Descripción</label>
+                                                            @*@Html.EditorFor(model => model.PROYECTOS_DESCRIPCION, new { htmlAttributes = new { @class = "form-control", placeholder = "Descripción" } })
+                                                              @Html.ValidationMessageFor(model => model.PROYECTOS_DESCRIPCION, "", new { @class = "text-danger" })*@
+                                                            <input type="text" id="DescripcionProyecto" name="DescripcionProyecto" class="form-control" placeholder="name" name="nombre">
+
+                                                            <label class="">Imagenes</label>
+                                                            <input type="file" class="form-control" id="archivo[]" name="archivo[]" multiple="">
+                                                            <br />
+                                                            <button type="button" onclick="ProyectosAjax()" class="btn btn-primary">Cargar</button>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <br />
-                                            <button type="submit" class="btn btn-primary">Cargar</button>
                                         </div>
-
-                                    </form>
-
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -55,5 +74,16 @@
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        function ProyectosAjax() {
+            var NombreProyecto = document.getElementById('NombreProyecto').value;
+            var DescripcionProyecto = document.getElementById('DescripcionProyecto').value;
+            var archivo = document.getElementById('archivo').value;
+            console.log(archivo);
+        
+        }
+    </script>
+
 </body>
 </html>
